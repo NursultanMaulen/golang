@@ -93,5 +93,5 @@ func useGorm(){
 }
 
 func main() {
-	useSql()
+	useGorm()
 }
