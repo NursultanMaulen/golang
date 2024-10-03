@@ -92,8 +92,56 @@ func insertTransaction(users []map[string]interface{}){
 	fmt.Println("SUCCESSFUL TRANSACTION")
 }
 
-func queryUsers(ageFilter *int, page, pageSize int) {
+func queryUsers(ageFilter int, page, pageSize int) {
+	query := `SELECT id, name, age FROM users`
+	var args []interface{}
 
+	query += ` WHERE age <= $1`
+	args = append(args, ageFilter)
+
+	query += ` ORDER BY id LIMIT $2 OFFSET $3`
+	args = append(args, pageSize, (page-1)*pageSize)
+
+	rows, err := db.Query(query, args...)
+	if err != nil {
+		log.Fatalf("FAIL QUERY REQUEST: %v", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var id int
+		var name string
+		var age int
+		err := rows.Scan(&id, &name, &age)
+		if err != nil {
+			log.Fatalf("FAIL SCAN ROW: %v", err)
+		}
+		fmt.Printf("ID: %d, Name: %s, Age: %d\n", id, name, age)
+	}
+
+	if err = rows.Err(); err != nil {
+		log.Fatalf("FAIL ITERATING: %v", err)
+	}
+}
+
+func deleteUser(id int) error {
+	query := `DELETE FROM users WHERE id = $1`
+	result, err := db.Exec(query, id)
+	if err != nil {
+		return fmt.Errorf("ERROR DELETING USER: %v", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("ERROR ROWS AFFECTED: %v", err)
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("USER ID %d NOT FOUND", id)
+	}
+
+	fmt.Printf("USER ID %d DELETED SUCCESSFULLY\n", id)
+	return nil
 }
 
 func main() {
@@ -101,23 +149,17 @@ func main() {
 	// dropTable()
 	// createTable()
 	// insertTransaction([]map[string]interface{}{
-	// 	{"name":"Clarey","age":41},
-	// 	{"name":"Shurlock","age":121},
-	// 	{"name":"Amanda","age":35},
-	// 	{"name":"Irita","age":7},
-	// 	{"name":"Billy","age":96},
-	// 	{"name":"Lorine","age":5},
-	// 	{"name":"Goran","age":85},
-	// 	{"name":"Brigham","age":105},
-	// 	{"name":"Nixie","age":34},
+	// 	{"name":"Clar","age":41},
 	// 	{"name":"Walsh","age":49},
 	// })
 
-	// var ageFilter *int = &25
+	// ageFilter := 25
 	// page := 1
 	// pageSize := 10
 
 	// queryUsers(ageFilter, page, pageSize)
+
+	// deleteUser(1)
 
 	defer db.Close()
 }

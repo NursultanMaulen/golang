@@ -1,0 +1,66 @@
+basePath: /
+definitions:
+  main.Profile:
+    properties:
+      bio:
+        type: string
+      id:
+        type: integer
+      profilePictureURL:
+        type: string
+      userID:
+        type: integer
+    type: object
+  main.User:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      profile:
+        $ref: '#/definitions/main.Profile'
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for managing users.
+  title: User API
+  version: "1.0"
+paths:
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new user in the database
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/main.User'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new user
+      tags:
+      - Users
+swagger: "2.0"
