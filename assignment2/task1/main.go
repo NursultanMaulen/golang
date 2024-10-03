@@ -100,7 +100,7 @@ func main() {
 	
 	// createTable()
 
-	// insertData("nursultan2", 21)
+	insertData("nursultan2", 21)
 
 	printUsers()
 
