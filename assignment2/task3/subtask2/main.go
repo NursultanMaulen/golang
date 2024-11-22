@@ -158,10 +158,10 @@ func main() {
 	connectGorm()
 	// createModel()
 	// insertUserWithProfile()
-	// queryUsersWithProfiles()
+	queryUsersWithProfiles()
 	// deleteUser(1)
-	err := updateUserProfile(db, 2, "NEW BIO", "https://example.com/new-profile-picture.jpg")
-	if err != nil {
-		log.Fatalf("Ошибка при обновлении профиля: %v", err)
-	}
+// 	err := updateUserProfile(db, 2, "NEW BIO", "https://example.com/new-profile-picture.jpg")
+// 	if err != nil {
+// 		log.Fatalf("Ошибка при обновлении профиля: %v", err)
+// 	}
 }
