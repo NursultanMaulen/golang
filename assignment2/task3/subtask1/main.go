@@ -147,17 +147,17 @@ func deleteUser(id int) error {
 func main() {
 	connectSQL()
 	// dropTable()
-	// createTable()
+	// // createTable()
 	// insertTransaction([]map[string]interface{}{
 	// 	{"name":"Clar","age":41},
 	// 	{"name":"Walsh","age":49},
 	// })
 
-	// ageFilter := 25
-	// page := 1
-	// pageSize := 10
+	ageFilter := 50
+	page := 1
+	pageSize := 10
 
-	// queryUsers(ageFilter, page, pageSize)
+	queryUsers(ageFilter, page, pageSize)
 
 	// deleteUser(1)
 
