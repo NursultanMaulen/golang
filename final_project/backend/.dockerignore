@@ -1,0 +1,7 @@
+# Исключаем ненужные файлы и папки
+.git
+.gitignore
+node_modules
+Dockerfile
+*.md
+*.log

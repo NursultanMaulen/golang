@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.aff1bb18.css",
+    "main.js": "/static/js/main.da7ebc17.js",
+    "static/media/undraw_online_learning_re_qw08.svg": "/static/media/undraw_online_learning_re_qw08.6aa0a4ebed74b6b00da7dfaea44f7da9.svg",
+    "static/media/playlist.png": "/static/media/playlist.172b4eca82d438b86b35.png",
+    "index.html": "/index.html",
+    "main.aff1bb18.css.map": "/static/css/main.aff1bb18.css.map",
+    "main.da7ebc17.js.map": "/static/js/main.da7ebc17.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aff1bb18.css",
+    "static/js/main.da7ebc17.js"
+  ]
+}
